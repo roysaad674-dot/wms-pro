@@ -1,0 +1,39 @@
+# System files
+.android/
+.antigravity/
+.appconfigs/
+Application Data/
+Cookies/
+Local Settings/
+My Documents/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+Start Menu/
+Templates/
+*.xml
+*.lnk
+
+# Environment
+.env
+.env.local
+
+# Node
+node_modules/
+.next/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Only track the FB directory
+!/FB/
