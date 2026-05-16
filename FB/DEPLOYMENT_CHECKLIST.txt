@@ -1,0 +1,276 @@
+================================================================================
+  FACEBOOK ADS DASHBOARD - HOSTINGER DEPLOYMENT CHECKLIST
+================================================================================
+
+📋 PRINT THIS OUT OR KEEP IN YOUR PHONE WHILE DEPLOYING
+
+================================================================================
+PHASE 1: PREPARATION (Complete BEFORE deployment)
+================================================================================
+
+[ ] Step 1: Hostinger Account
+    [ ] Hostinger account created
+    [ ] Billing active
+    [ ] VPS or Business plan activated
+
+[ ] Step 2: Domain Setup
+    [ ] Domain registered (or transfer initiated)
+    [ ] Domain DNS pointing to Hostinger servers
+    [ ] Domain verified in Hostinger Control Panel
+
+[ ] Step 3: Server Access
+    [ ] SSH access enabled
+    [ ] SSH credentials noted
+    [ ] SFTP/File Manager access verified
+    [ ] Server IP address: ________________
+
+[ ] Step 4: Project Files
+    [ ] Pushed to GitHub (or ready to upload)
+    [ ] All files included
+    [ ] .gitignore configured
+    [ ] No .env files in repo (secrets stay private!)
+
+================================================================================
+PHASE 2: DEPLOYMENT (Day of deployment)
+================================================================================
+
+[ ] Step 5: Upload Project
+    [ ] Project uploaded to /home/username/facebook-ads-dashboard
+    [ ] All files present on server
+    [ ] Permissions correct
+
+[ ] Step 6: Connect to Server
+    Command: ssh root@YOUR_SERVER_IP
+    [ ] SSH connection successful
+    [ ] Terminal ready
+
+[ ] Step 7: Run Deployment Script
+    Commands:
+    cd /home/username/facebook-ads-dashboard
+    chmod +x deploy.sh
+    ./deploy.sh
+
+    [ ] Script started
+    [ ] Node.js installation: COMPLETED
+    [ ] PM2 installation: COMPLETED
+    [ ] Nginx installation: COMPLETED
+    [ ] Dependencies installed: COMPLETED
+    [ ] Build completed: COMPLETED
+    [ ] Services started: COMPLETED
+
+[ ] Step 8: During deploy.sh - Answer Prompts
+    [ ] Enter domain name: ________________
+    [ ] Setup SSL: (y/n) ________________
+    [ ] Database created: (y/n) ________________
+
+[ ] Step 9: If Prompted - Create Database
+    Commands in MySQL:
+    CREATE DATABASE facebook_ads_db CHARACTER SET utf8mb4;
+    CREATE USER 'facebook_user'@'localhost' IDENTIFIED BY 'YOUR_PASSWORD';
+    GRANT ALL PRIVILEGES ON facebook_ads_db.* TO 'facebook_user'@'localhost';
+    FLUSH PRIVILEGES;
+
+    [ ] Database created
+    [ ] User created
+    [ ] Permissions granted
+    [ ] Database password: _________________________ (KEEP SAFE!)
+
+================================================================================
+PHASE 3: CONFIGURATION (After script completes)
+================================================================================
+
+[ ] Step 10: Environment Configuration
+    [ ] Edit backend/.env
+    [ ] Set DB_PASSWORD: ________________
+    [ ] Set other values
+    [ ] File saved securely
+
+[ ] Step 11: SSL Certificate
+    [ ] Let's Encrypt setup (if automated)
+    [ ] Or manual setup:
+        Command: sudo certbot --nginx -d your-domain.com
+    [ ] SSL certificate installed
+
+[ ] Step 12: Firewall Setup
+    Commands:
+    sudo ufw enable
+    sudo ufw allow 22,80,443/tcp
+
+    [ ] Firewall enabled
+    [ ] Ports opened
+
+[ ] Step 13: Verify Services Running
+    Command: pm2 status
+    [ ] Frontend running
+    [ ] Backend running
+    [ ] No errors in output
+
+================================================================================
+PHASE 4: VERIFICATION (Test everything works)
+================================================================================
+
+[ ] Step 14: Test Frontend
+    [ ] Open browser
+    [ ] Go to: https://your-domain.com
+    [ ] Page loads without errors
+    [ ] Login page appears
+
+[ ] Step 15: Test Login
+    [ ] Email: roy@example.com
+    [ ] Password: password123
+    [ ] Login successful
+    [ ] Dashboard loads
+
+[ ] Step 16: Test Database
+    [ ] Create a test user
+    [ ] Create a test campaign
+    [ ] Data persists after refresh
+    [ ] No database errors
+
+[ ] Step 17: Test API
+    In browser console or curl:
+    Command: curl https://your-domain.com/api/users
+
+    [ ] Returns JSON data
+    [ ] No connection errors
+    [ ] Status 200 OK
+
+================================================================================
+PHASE 5: POST-DEPLOYMENT (Final setup)
+================================================================================
+
+[ ] Step 18: Create Admin Account
+    [ ] Go to Users page
+    [ ] Create your admin account
+    [ ] Verify login works
+    [ ] Mark as Admin
+
+[ ] Step 19: Security Lockdown
+    [ ] Change MySQL root password
+    [ ] Change SSH access (optional: disable root)
+    [ ] Set file permissions to 600 for .env
+    [ ] Backup SSH key securely
+
+[ ] Step 20: Backup Configuration
+    [ ] Create backup script
+    [ ] Schedule daily backups
+    [ ] Test backup restoration
+    [ ] Store backup password securely
+
+[ ] Step 21: Monitoring Setup
+    Command: pm2 web
+    [ ] Enable monitoring
+    [ ] Access: http://YOUR_SERVER_IP:9615
+    [ ] Verify all metrics
+
+[ ] Step 22: Log Rotation
+    [ ] Check PM2 logs directory
+    [ ] Confirm log files exist
+    [ ] Check disk space usage
+    [ ] Plan for log cleanup
+
+================================================================================
+PHASE 6: DOCUMENTATION
+================================================================================
+
+[ ] Step 23: Save Important Information
+    [ ] Server IP: _______________________
+    [ ] Domain: _______________________
+    [ ] SSH username: _______________________
+    [ ] SSH key location: _______________________
+    [ ] Database user: facebook_user
+    [ ] Database password: _______________________ (KEEP SAFE!)
+    [ ] MySQL root password: _______________________ (KEEP SAFE!)
+    [ ] Admin email: _______________________
+    [ ] Admin password: _______________________ (KEEP SAFE!)
+
+[ ] Step 24: Backup Important Files
+    [ ] SSH private key - saved securely
+    [ ] .env files - saved securely offline
+    [ ] Database backup - location: _______________________
+    [ ] Deployment notes - documented
+
+================================================================================
+PHASE 7: OPTIMIZATION (Optional, do this week)
+================================================================================
+
+[ ] Step 25: Performance Testing
+    [ ] Load test the application
+    [ ] Check response times
+    [ ] Monitor memory usage
+    [ ] Monitor CPU usage
+
+[ ] Step 26: Security Audit
+    [ ] Run security checks
+    [ ] Review firewall rules
+    [ ] Check SSL certificate
+    [ ] Review access logs
+
+[ ] Step 27: Set Up Alerts
+    [ ] Email alerts for errors
+    [ ] Disk space warnings
+    [ ] Memory usage alerts
+    [ ] SSL expiration reminders
+
+================================================================================
+TROUBLESHOOTING QUICK REFERENCE
+================================================================================
+
+PROBLEM: Page blank / 502 error
+SOLUTION:
+  Command: pm2 logs
+  Check what errors appear
+  Restart: pm2 restart all
+
+PROBLEM: Cannot connect to database
+SOLUTION:
+  Check backend/.env for correct credentials
+  Verify database exists: mysql -u facebook_user -p facebook_ads_db
+  Restart backend: pm2 restart fb-ads-backend
+
+PROBLEM: Port already in use
+SOLUTION:
+  Find process: lsof -i :3000 or lsof -i :5000
+  Kill process: kill -9 PID
+  Restart: pm2 restart all
+
+PROBLEM: SSL not working
+SOLUTION:
+  Check certificate: sudo certbot certificates
+  Renew manually: sudo certbot renew
+  Check Nginx: sudo nginx -t
+  Restart Nginx: sudo systemctl restart nginx
+
+PROBLEM: Can't SSH into server
+SOLUTION:
+  Check IP address is correct
+  Verify SSH port (usually 22)
+  Check firewall allows SSH
+  Verify SSH key permissions: chmod 600 key.pem
+
+================================================================================
+DEPLOYMENT SUCCESS! ✅
+================================================================================
+
+If you've completed all steps above, your app is LIVE! 🎉
+
+Next steps:
+1. Monitor the app for first week
+2. Watch logs for any errors: pm2 logs
+3. Set up scheduled backups
+4. Invite users to join
+5. Track usage and optimize
+
+For help:
+- HOSTINGER_QUICK_START.md - Common commands
+- HOSTINGER_DEPLOYMENT.md - Detailed guide
+- support@hostinger.com - Hostinger support
+
+================================================================================
+DEPLOYMENT DATE: _______________
+DEPLOYED BY: _______________
+DEPLOYMENT NOTES:
+_____________________________________________________________________________
+_____________________________________________________________________________
+_____________________________________________________________________________
+================================================================================

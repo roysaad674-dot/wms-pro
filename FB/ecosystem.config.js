@@ -1,0 +1,41 @@
+module.exports = {
+  apps: [
+    {
+      name: 'fb-ads-frontend',
+      script: 'npm',
+      args: 'run start',
+      cwd: './',
+      instances: 1,
+      exec_mode: 'cluster',
+      env: {
+        NODE_ENV: 'production',
+        PORT: 3000,
+      },
+      error_file: 'logs/frontend-error.log',
+      out_file: 'logs/frontend-out.log',
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+    },
+    {
+      name: 'fb-ads-backend',
+      script: 'node',
+      args: 'backend/server.js',
+      cwd: './',
+      instances: 1,
+      exec_mode: 'fork',
+      env: {
+        NODE_ENV: 'production',
+        PORT: 5000,
+        DB_HOST: 'localhost',
+        DB_USER: 'your_db_user',
+        DB_PASSWORD: 'your_db_password',
+        DB_NAME: 'facebook_ads_db',
+      },
+      error_file: 'logs/backend-error.log',
+      out_file: 'logs/backend-out.log',
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+      autorestart: true,
+      watch: false,
+      max_memory_restart: '1G',
+    },
+  ],
+};
