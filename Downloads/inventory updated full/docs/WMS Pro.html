@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-density="balanced">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WMS Pro — ERP</title>
+
+  <!-- Geist + Geist Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <!-- Tokens & components -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html { background: var(--bg); }
+  </style>
+</head>
+<body>
+  <template id="__bundler_thumbnail" data-bg-color="#0e0b1f">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1a1240"/>
+          <stop offset="100%" stop-color="#0e0b1f"/>
+        </linearGradient>
+        <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#8b6cf6"/>
+          <stop offset="100%" stop-color="#5b3df0"/>
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="800" fill="url(#bg)"/>
+      <!-- chrome -->
+      <rect x="360" y="240" width="480" height="320" rx="22" fill="#1a1340" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+      <rect x="384" y="264" width="120" height="14" rx="3" fill="rgba(255,255,255,.5)"/>
+      <rect x="384" y="288" width="64" height="10" rx="3" fill="rgba(255,255,255,.25)"/>
+      <!-- kpi row -->
+      <rect x="384" y="320" width="100" height="72" rx="10" fill="rgba(255,255,255,.06)"/>
+      <rect x="494" y="320" width="100" height="72" rx="10" fill="rgba(255,255,255,.06)"/>
+      <rect x="604" y="320" width="100" height="72" rx="10" fill="rgba(255,255,255,.06)"/>
+      <rect x="714" y="320" width="100" height="72" rx="10" fill="rgba(255,255,255,.06)"/>
+      <!-- chart -->
+      <rect x="384" y="408" width="430" height="128" rx="10" fill="rgba(255,255,255,.04)"/>
+      <path d="M404 510 L 460 480 L 520 490 L 580 460 L 640 440 L 700 420 L 760 430 L 800 405" fill="none" stroke="url(#acc)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- W mark -->
+      <circle cx="600" cy="180" r="44" fill="url(#acc)"/>
+      <text x="600" y="198" font-family="ui-sans-serif,system-ui,sans-serif" font-size="40" font-weight="800" letter-spacing="-2" text-anchor="middle" fill="#fff">W</text>
+      <text x="600" y="664" font-family="ui-sans-serif,system-ui,sans-serif" font-size="22" font-weight="600" text-anchor="middle" fill="rgba(255,255,255,.85)" letter-spacing="2">WMS PRO</text>
+      <text x="600" y="692" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" text-anchor="middle" fill="rgba(255,255,255,.45)" letter-spacing="3">ENTERPRISE RESOURCE PLANNING</text>
+    </svg>
+  </template>
+  <div id="root"></div>
+
+  <!-- React + Babel -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <!-- Data + UI -->
+  <script type="text/babel" src="data.jsx"></script>
+  <script type="text/babel" src="charts.jsx"></script>
+  <script type="text/babel" src="shell.jsx"></script>
+  <script type="text/babel" src="pages/list-page.jsx"></script>
+  <script type="text/babel" src="pages/configs.jsx"></script>
+  <script type="text/babel" src="pages/configs-2.jsx"></script>
+  <script type="text/babel" src="pages/bespoke.jsx"></script>
+  <script type="text/babel" src="pages/forms.jsx"></script>
+  <script type="text/babel" src="pages/forms-2.jsx"></script>
+  <script type="text/babel" src="pages/forms-3.jsx"></script>
+  <script type="text/babel" src="pages/forms-4.jsx"></script>
+  <script type="text/babel" src="pages/dashboard.jsx"></script>
+  <script type="text/babel" src="pages/inventory.jsx"></script>
+  <script type="text/babel" src="pages/pos.jsx"></script>
+  <script type="text/babel" src="pages/sales.jsx"></script>
+  <script type="text/babel" src="pages/grn.jsx"></script>
+  <script type="text/babel" src="pages/reports.jsx"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+</body>
+</html>
