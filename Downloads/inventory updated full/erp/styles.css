@@ -900,8 +900,119 @@ a { color: inherit; text-decoration: none; }
 button:focus { outline: none; }
 input:focus { outline: none; }
 
-/* responsive */
+/* ==========================================================================
+   Responsive breakpoints
+   ========================================================================== */
+
+/* ── 1280px: 4-col kpis → 2-col, 2/1 grids stack ── */
 @media (max-width: 1280px) {
   .kpis { grid-template-columns: repeat(2, 1fr); }
   .grid-12, .grid-21 { grid-template-columns: 1fr; }
+}
+
+/* ── 1024px: auto-collapse sidebar, grid-2 stays ── */
+@media (max-width: 1024px) {
+  :root { --side-w: 200px; }
+  .topbar-search { width: 200px; }
+}
+
+/* ── 900px: hide side panel, collapse 2-col form grids ── */
+@media (max-width: 900px) {
+  /* auto-rail mode when viewport is narrow */
+  .app { grid-template-columns: var(--rail-w) 0 1fr !important; }
+  .sidepanel { display: none !important; }
+
+  /* 2-col form grids → single column */
+  .grid-2 { grid-template-columns: 1fr !important; }
+  .grid-3 { grid-template-columns: 1fr 1fr !important; }
+
+  /* kpis 4→2 */
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+
+  /* topbar: hide search bar, squeeze */
+  .topbar-search { display: none; }
+  .topbar { padding: 0 12px; gap: 8px; }
+  .crumbs .curr { max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* page head: stack vertically */
+  .page-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .ph-actions { flex-wrap: wrap; gap: 6px; }
+
+  /* forms: reduce padding */
+  .card-pad { padding: 14px; }
+  .page { padding: 14px; }
+}
+
+/* ── 640px: full mobile ── */
+@media (max-width: 640px) {
+  /* rail icons only, no labels */
+  .rail-lbl { display: none; }
+  .rail-btn { padding: 10px 0; justify-content: center; }
+  :root { --rail-w: 56px; }
+
+  /* kpis → single column */
+  .kpis { grid-template-columns: 1fr 1fr; }
+
+  /* grid-3 → single col */
+  .grid-3 { grid-template-columns: 1fr !important; }
+
+  /* tables: allow horizontal scroll */
+  .tbl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tbl th, .tbl td { white-space: nowrap; }
+
+  /* POS: stack product grid + cart */
+  .pos-layout, [style*="gridTemplateColumns: 1fr 380px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* topbar action buttons: icon only */
+  .icon-btn .ib-label { display: none; }
+  .btn.btn-sm span:not(.fa-solid):not(.fa-regular) { display: none; }
+
+  /* ph-actions: wrap tighter */
+  .ph-actions .btn { padding: 6px 10px; font-size: 12px; }
+  .ph-actions .btn i { margin-right: 4px; }
+}
+
+/* ── ensure spans in grid-2 don't overflow at narrow widths ── */
+@media (max-width: 900px) {
+  [style*="gridColumn: span 2"] { grid-column: span 1 !important; }
+  .field[style*="gridColumn: span 2"] { grid-column: span 1 !important; }
+}
+
+/* ── mobile: collapse ALL inline grid containers inside cards/pages ── */
+@media (max-width: 640px) {
+  /* collapse any div that uses inline gridTemplateColumns with 2+ cols */
+  .card-pad > div,
+  .page > div > div,
+  .col > div {
+    max-width: 100%;
+  }
+
+  /* target inline 2-col grids directly */
+  [style*="1fr 1fr"],
+  [style*="repeat(2"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* span-2 items become span-1 on mobile */
+  [style*="span 2"],
+  [style*="gridColumn: span"],
+  [style*="grid-column: span"] {
+    grid-column: span 1 !important;
+  }
+
+  /* fix repeated(N,1fr) grids that have too many cols */
+  [style*="repeat(3"],
+  [style*="repeat(4"],
+  [style*="repeat(5"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* hide rail logo text on very small screens */
+  .rail-logo-name { display: none; }
+  .rail-logo { padding: 12px 0; justify-content: center; }
+
+  /* POS specific: don't collapse payment buttons grid */
+  [style*="repeat(3, 1fr)"] { grid-template-columns: repeat(3, 1fr) !important; }
 }
